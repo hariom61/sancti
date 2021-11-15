@@ -1,0 +1,33 @@
+{
+	"name": "breakermind/sancti",
+	"type": "library",
+	"autoload": {
+		"classmap": [
+			"src/"
+		],
+		"psr-4": {
+			"Sancti\\": "src/",
+			"Sancti\\Factories\\": "database/factories/",
+			"Sancti\\Migrations\\": "database/migrations/",
+			"Sancti\\Seeders\\": "database/seeders/"
+		}
+	},
+	"authors": [{
+		"name": "Marcin Łukaszewski",
+		"email": "marcin@breakermind.com"
+	}],
+	"minimum-stability": "dev",
+	"require": {
+		"laravel/sanctum": "^2.12"
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Sancti\\SanctiServiceProvider"
+			],
+			"aliases": {
+				"Sancti": "Sancti\\Http\\Facades\\SanctiFacade"
+			}
+		}
+	}
+}
