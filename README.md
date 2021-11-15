@@ -32,10 +32,21 @@ Rest api register / login authentication with user account email verification ba
 ]
 ```
 
-### Publish resources (optional)
+### Update
+```sh
+composer update
+compoer dump-autoload -o
+```
+
+### Publish resources
 ```sh
 php artisan vendor:publish --provider="Sancti\SanctiServiceProvider.php"
 php artisan vendor:publish --tag=sancti-config --force
+```
+
+### Migrations
+```sh
+php artisan migrate
 ```
 
 ### Default routes tests
