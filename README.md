@@ -8,6 +8,7 @@ Rest api register / login authentication with user account email verification ba
 - Reset password
 - Change password
 - Logout user
+- Delete tokens
 
 ### Install with composer
 Configure sanctum authentication for laravel first https://laravel.com/docs/8.x/sanctum !!!
@@ -23,6 +24,12 @@ Configure sanctum authentication for laravel first https://laravel.com/docs/8.x/
 }
 ```
 
+### Update
+```sh
+composer update
+compoer dump-autoload -o
+```
+
 ### Add service to laravel app config/app.php
 ```php
 'providers' => [
@@ -31,12 +38,6 @@ Configure sanctum authentication for laravel first https://laravel.com/docs/8.x/
 'aliases' => [
 	'Sancti' => Sancti\Http\Facades\SanctiFacade::class,
 ]
-```
-
-### Update
-```sh
-composer update
-compoer dump-autoload -o
 ```
 
 ### Publish resources
