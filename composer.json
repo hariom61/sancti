@@ -1,6 +1,7 @@
 {
 	"name": "breakermind/sancti",
 	"type": "library",
+	"license": "MIT",
 	"autoload": {
 		"classmap": [
 			"src/"
