@@ -10,7 +10,7 @@ Rest api register / login authentication with user account email verification ba
 - Logout user
 
 ### Install with composer
-Configure sanctum authentication for laravel first !!!
+Configure sanctum authentication for laravel first https://laravel.com/docs/8.x/sanctum !!!
 ```sh
 {
 	"repositories": [{
