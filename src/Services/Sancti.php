@@ -105,20 +105,20 @@ class Sancti
 			throw new Exception("Unable to send e-mail, please try again later.");
 		}
 
-		return response()->json(['message' => 'A new password has been sent to the e-mail address provided.']);
+		return ['message' => 'A new password has been sent to the e-mail address provided.'];
 	}
 
 	function change(ChangePasswordRequest $request)
 	{
-		try {
-			if (Hash::check($request->input('password_current'), $request->user()->password)) {
+		if (Hash::check($request->input('password_current'), $request->user()->password)) {
+			try {
 				User::where(['email' => $request->user()->email])->update(['password' => Hash::make($request->input('password'))]);
-			} else {
-				throw new Exception("Invalid passwords.", 402);
+			} catch (Exception $e) {
+				Log::error($e->getMessage());
+				throw new Exception("Database error.", 402);
 			}
-		} catch (Exception $e) {
-			Log::error($e->getMessage());
-			throw new Exception("Database error.", 402);
+		} else {
+			throw new Exception("Invalid current password.", 402);
 		}
 
 		return ['message' => 'A password has been updated.'];
