@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 trait AuthHelper
 {
-	function verifyEmail($user)
+	function verifyEmail(User $user)
 	{
 		$this->checkUser($user);
 
@@ -19,7 +19,7 @@ trait AuthHelper
 		return $user;
 	}
 
-	function activateEmail($user)
+	function activateEmail(?User $user)
 	{
 		$this->checkUser($user);
 
@@ -29,7 +29,7 @@ trait AuthHelper
 		return $user;
 	}
 
-	function createCode($user)
+	function createCode(User $user)
 	{
 		$this->checkUser($user);
 
@@ -40,7 +40,7 @@ trait AuthHelper
 		return $user;
 	}
 
-	function updatePassword($user, $password)
+	function updatePassword(User $user, $password)
 	{
 		$this->checkUser($user);
 
@@ -51,7 +51,7 @@ trait AuthHelper
 		return $user;
 	}
 
-	function checkUser($user)
+	function checkUser(?User $user)
 	{
 		if(empty($user) || empty($user->id) || empty($user->email)) {
 			throw new Exception("User not found.");
