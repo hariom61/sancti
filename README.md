@@ -7,7 +7,7 @@ Rest api register / login authentication with user account email verification ba
 - Activate email
 - Reset password
 - Change password
-- Logaut user
+- Logout user
 
 ### Install with composer
 ```sh
