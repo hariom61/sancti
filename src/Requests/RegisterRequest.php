@@ -41,7 +41,7 @@ class RegisterRequest extends FormRequest
 	function prepareForValidation()
 	{
 		$this->merge(
-			request()->json()->all()
+			collect(request()->json()->all())->only(['name', 'email', 'password', 'password_confirmation'])->toArray()
 		);
 	}
 }

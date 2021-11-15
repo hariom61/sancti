@@ -31,7 +31,7 @@ class ChangePasswordRequest extends FormRequest
 	function prepareForValidation()
 	{
 		$this->merge(
-			request()->json()->all()
+			collect(request()->json()->all())->only(['password_current', 'password', 'password_confirmation'])->toArray()
 		);
 	}
 }

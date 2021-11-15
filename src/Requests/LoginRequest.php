@@ -35,7 +35,7 @@ class LoginRequest extends FormRequest
 	function prepareForValidation()
 	{
 		$this->merge(
-			request()->json()->all()
+			collect(request()->json()->all())->only(['email', 'password'])->toArray()
 		);
 	}
 }
