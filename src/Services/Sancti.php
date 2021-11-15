@@ -13,8 +13,9 @@ use Sancti\Mail\PasswordMail;
 use Sancti\Mail\RegisterMail;
 use Sancti\Http\Traits\AuthHelper;
 use Sancti\Http\Requests\LoginRequest;
-use Sancti\Http\Requests\ResetPasswordRequest;
+use Sancti\Http\Requests\ActivateRequest;
 use Sancti\Http\Requests\RegisterRequest;
+use Sancti\Http\Requests\ResetPasswordRequest;
 use Sancti\Http\Requests\ChangePasswordRequest;
 
 class Sancti
@@ -64,10 +65,12 @@ class Sancti
 		return ['message' => 'Account has been created, please confirm your email address.'];
 	}
 
-	function activate($id,$code)
+	function activate(ActivateRequest $request)
 	{
+		$valid = $request->validated();
+
 		try {
-			$user = User::where('id', $id)->whereNotNull('code')->where('code', $code)->first();
+			$user = User::where('id', $valid['id'])->whereNotNull('code')->where('code', $valid['code'])->first();
 			$this->activateEmail($user);
 		} catch (Exception $e) {
 			Log::error($e->getMessage());

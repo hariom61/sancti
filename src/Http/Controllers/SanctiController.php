@@ -5,6 +5,7 @@ namespace Sancti\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Sancti\Http\Requests\LoginRequest;
+use Sancti\Http\Requests\ActivateRequest;
 use Sancti\Http\Requests\RegisterRequest;
 use Sancti\Http\Requests\ResetPasswordRequest;
 use Sancti\Http\Requests\ChangePasswordRequest;
@@ -18,9 +19,9 @@ class SanctiController extends Controller
 		return (new Sancti())->login($r);
 	}
 
-	function activate($id,$code)
+	function activate(ActivateRequest $request)
 	{
-		return (new Sancti())->activate($id,$code);
+		return (new Sancti())->activate($request);
 	}
 
 	function register(RegisterRequest $r)

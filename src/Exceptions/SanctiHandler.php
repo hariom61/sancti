@@ -33,7 +33,7 @@ class SanctiHandler extends ExceptionHandler
 
 		$this->renderable(function (NotFoundHttpException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Record not found.'], 404);
+				return response()->json(['message' => 'Page not found.'], 404);
 			}
 		});
 
