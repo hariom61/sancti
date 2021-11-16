@@ -35,7 +35,7 @@ class RegisterRequest extends FormRequest
 
 	public function failedValidation(Validator $validator)
 	{
-		throw new \Exception($validator->errors()->first());
+		throw new \Exception($validator->errors()->first(), 422);
 	}
 
 	function prepareForValidation()

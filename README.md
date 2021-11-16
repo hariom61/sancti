@@ -10,8 +10,35 @@ Rest api register / login authentication with user account email verification ba
 - Logout user
 - Delete tokens
 
+### Create laravel project
+```sh
+composer create-project laravel/laravel sancti
+cd sancti
+```
+
+### Configure mysql, smtp in .env file
+nano sancti/.env
+
+### Sanctum setup
+Configure sanctum authentication for laravel https://laravel.com/docs/8.x/sanctum !!!
+```sh
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+```
+
+### Migrations
+```sh
+php artisan migrate
+```
+
+### Sanctum middleware for SPA (optional)
+nano app/Http/Kernel.php
+```php
+'api' => [
+    \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+],
+```
+
 ### Install with composer
-Configure sanctum authentication for laravel first https://laravel.com/docs/8.x/sanctum !!!
 ```sh
 {
 	"repositories": [{

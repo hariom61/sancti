@@ -13,7 +13,7 @@ trait AuthHelper
 		$this->checkUser($user);
 
 		if(empty($user->email_verified_at)) {
-			throw new Exception("Account not activated.");
+			throw new Exception("Account not activated.", 422);
 		}
 
 		return $user;
@@ -54,7 +54,7 @@ trait AuthHelper
 	function checkUser(?User $user)
 	{
 		if(empty($user) || empty($user->id) || empty($user->email)) {
-			throw new Exception("User not found.");
+			throw new Exception("User not found.", 422);
 		}
 
 		return $user;

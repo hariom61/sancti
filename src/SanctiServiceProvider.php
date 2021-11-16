@@ -5,6 +5,7 @@ namespace Sancti;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Sancti\Exceptions\SanctiHandler;
+use Sancti\Exceptions\SanctiCodeHandler;
 use Sancti\Http\Facades\SanctiFacade;
 use Sancti\Services\Sancti;
 
@@ -22,8 +23,11 @@ class SanctiServiceProvider extends ServiceProvider
 			return new SanctiFacade();
 		});
 
-		$this->app->singleton(ExceptionHandler::class, SanctiHandler::class);
-
+		if(config('sancti.settings.code_handler') == true) {
+			$this->app->singleton(ExceptionHandler::class, SanctiCodeHandler::class);
+		} else {
+			$this->app->singleton(ExceptionHandler::class, SanctiHandler::class);
+		}
 	}
 
 	public function boot()

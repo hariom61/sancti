@@ -29,11 +29,11 @@ class Sancti
 				$this->verifyEmail($request->user());
 			} catch (Exception $e) {
 				Log::error($e->getMessage());
-				throw new Exception("Confirm email address.", 402);
+				throw new Exception("Confirm email address.", 422);
 			}
 			return ['token' => $request->user()->createToken('sancti_app')->plainTextToken];
 		} else {
-			throw new Exception("Invalid credentials.", 402);
+			throw new Exception("Invalid credentials.", 422);
 		}
 	}
 
@@ -51,7 +51,7 @@ class Sancti
 			$user = $this->createCode($user);
 		} catch (Exception $e) {
 			Log::error($e->getMessage());
-			throw new Exception("Can not create user.", 402);
+			throw new Exception("Can not create user.", 422);
 		}
 
 		try {
@@ -59,7 +59,7 @@ class Sancti
 		} catch (Exception $e) {
 			$user->delete();
 			Log::error($e->getMessage());
-			throw new Exception("Unable to send e-mail, please try again later.", 402);
+			throw new Exception("Unable to send e-mail, please try again later.", 422);
 		}
 
 		return ['message' => 'Account has been created, please confirm your email address.'];
@@ -74,7 +74,7 @@ class Sancti
 			$this->activateEmail($user);
 		} catch (Exception $e) {
 			Log::error($e->getMessage());
-			throw new Exception("Invalid activation code.", 402);
+			throw new Exception("Invalid activation code.", 422);
 		}
 
 		return ['message' => 'Email has been confirmed.'];
@@ -94,7 +94,7 @@ class Sancti
 			$user = User::where(['email' => $valid['email']])->first();
 		} catch (Exception $e) {
 			Log::error($e->getMessage());
-			throw new Exception("Database error.", 402);
+			throw new Exception("Database error.", 422);
 		}
 
 		$password = uniqid();
@@ -118,10 +118,10 @@ class Sancti
 				User::where(['email' => $request->user()->email])->update(['password' => Hash::make($request->input('password'))]);
 			} catch (Exception $e) {
 				Log::error($e->getMessage());
-				throw new Exception("Database error.", 402);
+				throw new Exception("Database error.", 422);
 			}
 		} else {
-			throw new Exception("Invalid current password.", 402);
+			throw new Exception("Invalid current password.", 422);
 		}
 
 		return ['message' => 'A password has been updated.'];
