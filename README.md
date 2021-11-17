@@ -204,6 +204,12 @@ Add import repo path to **dev-main** directory
 }
 ```
 
+### Localhost website
+nano /etc/hosts
+```sh
+127.0.0.1 app.xx www.app.xx
+```
+
 ### Permissions
 ```sh
 mkdir -p /www/sancti/public
