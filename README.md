@@ -10,17 +10,44 @@ Rest api register / login authentication with user account email verification ba
 - Logout user
 - Delete tokens
 
-### Create laravel project
+## Create laravel project
 ```sh
 composer create-project laravel/laravel sancti
 cd sancti
 ```
 
-### Configure mysql, smtp in .env file
-nano sancti/.env
+### Install sancti with composer
+composer require breakermind/sancti
+```json
+{
+	"require": {
+		"breakermind/sancti": "^1.0"
+	}
+}
+```
 
-### Sanctum setup
-Configure sanctum authentication for laravel https://laravel.com/docs/8.x/sanctum !!!
+### Create database and configure mysql, smtp in .env file
+nano sancti/.env
+```sh
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=toor
+
+MAIL_MAILER=smtp
+MAIL_HOST=localhost
+MAIL_PORT=25
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=hi@localhost
+MAIL_FROM_NAME="${APP_NAME}"
+```
+
+## Sanctum setup
+Configure sanctum authentication for laravel https://laravel.com/docs/8.x/sanctum
 ```sh
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 ```
@@ -34,40 +61,12 @@ php artisan migrate
 nano app/Http/Kernel.php
 ```php
 'api' => [
+	// Unhash
     \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-],
-```
-
-### Install with composer
-```sh
-{
-	"repositories": [{
-		"type": "vcs",
-		"url": "https://github.com/breakermind/sancti"
-	}],
-	"require": {
-		"breakermind/sancti": "^1.0"
-	}
-}
-```
-
-### Update
-```sh
-composer update
-compoer dump-autoload -o
-```
-
-### Add service to laravel app config/app.php
-```php
-'providers' => [
-	Sancti\SanctiServiceProvider::class,
-],
-'aliases' => [
-	'Sancti' => Sancti\Http\Facades\SanctiFacade::class,
 ]
 ```
 
-### Publish resources
+## Sancti setup
 ```sh
 php artisan vendor:publish --provider="Sancti\SanctiServiceProvider.php"
 php artisan vendor:publish --tag=sancti-config --force
@@ -76,6 +75,17 @@ php artisan vendor:publish --tag=sancti-config --force
 ### Migrations
 ```sh
 php artisan migrate
+```
+
+### Update composer autoload
+```sh
+composer update
+composer dump-autoload -o
+```
+
+### Run local server
+```sh
+php artisan serv
 ```
 
 ### Default routes tests
@@ -122,4 +132,31 @@ Route::middleware(['auth:sanctum'])->group(function () {
 	// Only authorized users
 	Route::get('/user/{id}', [UserController::class, 'details'])->name('user.details');
 });
+```
+
+# Package
+
+### Add service provider to config/app.php
+Add if installed not from composer or if local package or errors
+```php
+'providers' => [
+	Sancti\SanctiServiceProvider::class,
+],
+'aliases' => [
+	'Sancti' => Sancti\Http\Facades\SanctiFacade::class,
+]
+```
+
+### Local package development
+Add import repo paths **dev-main**
+```json
+{
+	"repositories": [{
+		"type": "vcs",
+		"url": "https://github.com/breakermind/sancti"
+	}],
+	"require": {
+		"breakermind/sancti": "dev-main"
+	}
+}
 ```
