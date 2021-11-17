@@ -134,9 +134,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 ```
 
-# Package
+## Package settings
 
-### Add service provider to config/app.php
+### Add service provider to config/app.php (if errors)
 Add if installed not from composer or if local package or errors
 ```php
 'providers' => [
@@ -147,13 +147,26 @@ Add if installed not from composer or if local package or errors
 ]
 ```
 
-### Local package development
-Add import repo paths **dev-main**
+### Get package without packagist
 ```json
 {
 	"repositories": [{
 		"type": "vcs",
 		"url": "https://github.com/breakermind/sancti"
+	}],
+	"require": {
+		"breakermind/sancti": "^1.0"
+	}
+}
+```
+
+### Local package development
+Add import repo path to **dev-main** directory
+```json
+{
+	"repositories": [{
+		"type": "path",
+		"url": "packages/breakermind/sancti"
 	}],
 	"require": {
 		"breakermind/sancti": "dev-main"
