@@ -105,9 +105,12 @@ php artisan serv
 ## Default routes test (change http://app.xx to http://127.0.0.1:8000)
 Allowed request content types: application/json or x-www-form-urlencoded
 ```sh
+# login local
+curl -X POST http://127.0.0.1:8000/api/login -d '{"email": "bo@woo.xx", "password": "password123"}'  -H 'Content-Type: application/json'
+
 # login
-curl -X POST http://app.xx/api/login -F "password=password123" -F "email=bo@woo.xx"
 curl -X POST http://app.xx/api/login -d '{"email": "bo@woo.xx", "password": "password123"}'
+curl -X POST http://app.xx/api/login -F "password=password123" -F "email=bo@woo.xx"
 
 # register
 curl -X POST http://app.xx/api/register -F "name=Jony" -F "password=password123" -F "password_confirmation=password123" -F "email=bo@woo.xx"
