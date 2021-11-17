@@ -145,6 +145,10 @@ curl http://127.0.0.1:8000/api/delete -H 'Authorization: Bearer 3|pxskFEFmBB0VZb
 ## Sanctum routes
 routes/api.php
 ```php
+<?php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 // Public routes
 Route::get('/post/{id}', [PostController::class, 'details'])->name('post.details');
 
@@ -162,6 +166,11 @@ Route::prefix('api')->name('api.')->middleware(['api'])->group(function() {
 		// Private routes goes here (logged users)
 	});
 });
+
+// Last route
+Route::fallback(function (){
+	return response()->json(['message' => 'Unauthorized!'], 401);
+})->name('fallback');
 ```
 
 ## Package settings
@@ -202,6 +211,26 @@ Add import repo path to **dev-main** directory
 		"breakermind/sancti": "dev-main"
 	}
 }
+```
+
+### Install vps/linux
+Install required server packages.
+```sh
+# firewall, stuff
+sudo apt install git composer ufw net-tools dnsutils mailutils
+
+# servers
+sudo apt install mariadb-server postfix nginx redis memcached
+
+# php
+sudo apt install -y php7.3-fpm
+sudo apt install -y php7.3-{mysql,json,xml,curl,mbstring,opcache,gd,imagick,imap,bcmath,bz2,zip,intl,redis,memcache,memcached}
+
+sudo apt install -y php7.4-fpm
+sudo apt install -y php7.4-{mysql,json,xml,curl,mbstring,opcache,gd,imagick,imap,bcmath,bz2,zip,intl,redis,memcache,memcached}
+
+sudo apt install -y php8.0-fpm
+sudo apt install -y php8.0-{mysql,xml,curl,mbstring,opcache,gd,imagick,imap,bcmath,bz2,zip,intl,redis,memcache,memcached}
 ```
 
 ### Localhost website
