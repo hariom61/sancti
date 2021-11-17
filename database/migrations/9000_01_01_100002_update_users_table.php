@@ -14,10 +14,18 @@ class UpdateUsersTable extends Migration
 	public function up()
 	{
 		Schema::table('users', function (Blueprint $table) {
-			$table->timestamp('email_verified_at')->nullable(true);
-			$table->string('code', 128)->unique()->nullable(true);
-			$table->string('ip')->nullable(true);
-			$table->softDeletes();
+			if (!Schema::hasColumn('users', 'email_verified_at')) {
+				$table->timestamp('email_verified_at')->nullable(true);
+			}
+			if (!Schema::hasColumn('users', 'code')) {
+				$table->string('code', 128)->unique()->nullable(true);
+			}
+			if (!Schema::hasColumn('users', 'ip')) {
+				$table->string('ip')->nullable(true);
+			}
+			if (!Schema::hasColumn('users', 'deleted_at')) {
+				$table->softDeletes();
+			}
 		});
 	}
 
