@@ -209,7 +209,7 @@ chmod -R 2775 /www
 server {
         listen 80;
         listen [::]:80;
-        server_name app.xx;
+        server_name app.xx www.app.xx;
         root /www/sancti/public;
         index index.php index.html;
         location / {
@@ -227,5 +227,7 @@ server {
         }
         disable_symlinks off;
         client_max_body_size 100M;
+        charset utf-8;
+		source_charset utf-8;
 }
 ```
