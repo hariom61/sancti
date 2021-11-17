@@ -28,12 +28,12 @@ composer create-project laravel/laravel sancti
 cd sancti
 ```
 
-### Install sancti with composer (v1.0 or dev-main)
+### Install sancti with composer (v2.0 or dev-main)
 composer require breakermind/sancti
 ```json
 {
 	"require": {
-		"breakermind/sancti": "^1.0"
+		"breakermind/sancti": "^2.0"
 	}
 }
 ```
