@@ -88,7 +88,7 @@ composer dump-autoload -o
 php artisan serv
 ```
 
-### Default routes tests
+### Default routes test (change http://app.xx to http://127.0.0.1:8000)
 Allowed request content types: application/json or x-www-form-urlencoded
 ```sh
 # login
