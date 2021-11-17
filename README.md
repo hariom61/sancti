@@ -118,7 +118,6 @@ curl http://app.xx/api/logout -H 'Authorization: Bearer 1|Sfp1JQPzY0AoeETTkR9A8Q
 
 # delete tokens logged users
 curl http://app.xx/api/delete -H 'Authorization: Bearer 1|Sfp1JQPzY0AoeETTkR9A8QkrAMDZ5ITQxrrwLpZK'
-
 ```
 
 ### Routes example
@@ -171,5 +170,38 @@ Add import repo path to **dev-main** directory
 	"require": {
 		"breakermind/sancti": "dev-main"
 	}
+}
+```
+
+### Permissions, dirs
+```sh
+mkdir -p /www/sancti/public
+chown -R username:www-data /www
+chmod -R 2775 /www
+```
+
+### Nginx virtualhost
+```conf
+server {
+        listen 80;
+        listen [::]:80;
+        server_name app.xx;
+        root /www/sancti/public;
+        index index.php index.html;
+        location / {
+                # try_files $uri $uri/ =404;
+                try_files $uri $uri/ /index.php$is_args$args;
+        }
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/run/php/php8.0-fpm.sock;
+                # fastcgi_pass 127.0.0.1:9000;
+        }
+        location ~* \.(js|css|png|jpg|jpeg|gif|webp|svg|ico)$ {
+            expires -1;
+            access_log off;
+        }
+        disable_symlinks off;
+        client_max_body_size 100M;
 }
 ```
