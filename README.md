@@ -10,6 +10,18 @@ Rest api register / login authentication with user account email verification ba
 - Logout user
 - Delete tokens
 
+## Create database user with mysql
+mysql -u root -p
+```sh
+GRANT ALL PRIVILEGES ON *.* TO root@localhost IDENTIFIED BY 'toor';
+GRANT ALL PRIVILEGES ON *.* TO root@127.0.0.1 IDENTIFIED BY 'toor';
+```
+
+### Create database mysql command line
+```sh
+mysql -uroot -ptoor -e "CREATE DATABASE IF NOT EXISTS laravel;"
+```
+
 ## Create laravel project
 ```sh
 composer create-project laravel/laravel sancti
@@ -26,21 +38,10 @@ composer require breakermind/sancti
 }
 ```
 
-### Create database user with mysql
-mysql -u root -p
-```sh
-GRANT ALL PRIVILEGES ON *.* TO root@localhost IDENTIFIED BY 'toor';
-GRANT ALL PRIVILEGES ON *.* TO root@127.0.0.1 IDENTIFIED BY 'toor';
-```
-
-### Create database mysql command line
-```sh
-mysql -uroot -ptoor -e "CREATE DATABASE IF NOT EXISTS laravel;"
-```
-
 ### Create database and configure mysql, smtp in .env file
 nano sancti/.env
 ```sh
+# Mysql settings
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -48,6 +49,7 @@ DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=toor
 
+# Smpt (etc. gmail, mailgun or localhost)
 MAIL_MAILER=smtp
 MAIL_HOST=localhost
 MAIL_PORT=25
@@ -100,7 +102,7 @@ composer dump-autoload -o
 php artisan serv
 ```
 
-### Default routes test (change http://app.xx to http://127.0.0.1:8000)
+## Default routes test (change http://app.xx to http://127.0.0.1:8000)
 Allowed request content types: application/json or x-www-form-urlencoded
 ```sh
 # login
@@ -132,7 +134,7 @@ curl http://app.xx/api/logout -H 'Authorization: Bearer 1|Sfp1JQPzY0AoeETTkR9A8Q
 curl http://app.xx/api/delete -H 'Authorization: Bearer 1|Sfp1JQPzY0AoeETTkR9A8QkrAMDZ5ITQxrrwLpZK'
 ```
 
-### Routes example
+## Sanctum routes
 routes/api.php
 ```php
 // Public routes
@@ -143,12 +145,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
 	// Only authorized users
 	Route::get('/user/{id}', [UserController::class, 'details'])->name('user.details');
 });
+
+// Api routes here
+Route::prefix('api')->name('api.')->middleware(['api'])->group(function() {
+	// Public routes goes here
+
+	Route::middleware(['auth:sanctum'])->group(function () {
+		// Private routes goes here (logged users)
+	});
+});
 ```
 
 ## Package settings
 
 ### Add service provider to config/app.php (if errors)
-Add if installed not from composer or if local package or errors
+Add if installed not from composer or if local package or if errors
 ```php
 'providers' => [
 	Sancti\SanctiServiceProvider::class,
@@ -185,9 +196,10 @@ Add import repo path to **dev-main** directory
 }
 ```
 
-### Permissions, dirs
+### Permissions
 ```sh
 mkdir -p /www/sancti/public
+
 chown -R username:www-data /www
 chmod -R 2775 /www
 ```
