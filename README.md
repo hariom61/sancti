@@ -26,6 +26,18 @@ composer require breakermind/sancti
 }
 ```
 
+### Create database user with mysql
+mysql -u root -p
+```sh
+GRANT ALL PRIVILEGES ON *.* TO root@localhost IDENTIFIED BY 'toor';
+GRANT ALL PRIVILEGES ON *.* TO root@127.0.0.1 IDENTIFIED BY 'toor';
+```
+
+### Create database mysql command line
+```sh
+mysql -uroot -ptoor -e "CREATE DATABASE IF NOT EXISTS laravel;"
+```
+
 ### Create database and configure mysql, smtp in .env file
 nano sancti/.env
 ```sh
