@@ -43,6 +43,9 @@ Copy files from package **tests/Sancti** directory to laravel app **tests/Sancti
 <testsuite name="Sancti">
 	<directory suffix="Test.php">./tests/Sancti</directory>
 </testsuite>
+
+<env name="APP_ENV" value="testing" force="true"/>
+<env name="APP_DEBUG" value="true" force="true"/>
 ```
 
 ### Run tests
