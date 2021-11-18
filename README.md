@@ -19,7 +19,7 @@ GRANT ALL PRIVILEGES ON *.* TO root@127.0.0.1 IDENTIFIED BY 'toor';
 
 ### Create database mysql command line
 ```sh
-mysql -uroot -ptoor -e "CREATE DATABASE IF NOT EXISTS laravel;"
+mysql -uroot -ptoor -e "CREATE DATABASE IF NOT EXISTS laravel CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 ```
 
 ## Create laravel project
