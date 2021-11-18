@@ -8,6 +8,7 @@ use Sancti\Exceptions\SanctiHandler;
 use Sancti\Exceptions\SanctiCodeHandler;
 use Sancti\Http\Facades\SanctiFacade;
 use Sancti\Services\Sancti;
+use Tests\Sancti\SanctiTest;
 
 class SanctiServiceProvider extends ServiceProvider
 {
@@ -43,6 +44,10 @@ class SanctiServiceProvider extends ServiceProvider
 				__DIR__.'/../config/config.php' => config_path('sancti.php'),
 				__DIR__.'/../resources/views' => resource_path('views/vendor/sancti')
 			], 'sancti-config');
+
+			$this->publishes([
+				__DIR__.'/../tests/Sancti' => base_path('tests/Sancti')
+			], 'sancti-tests');
 		}
 	}
 }

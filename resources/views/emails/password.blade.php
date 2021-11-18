@@ -3,5 +3,5 @@
 </div>
 <div class="row">
 	<p> @lang('Your new password') </p>
-	<h4> {{ $password }} </h4>
+	<password>{{ $password }}</password>
 </div>

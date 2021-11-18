@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 trait AuthHelper
 {
-	function verifyEmail(User $user)
+	function verifyEmail(?User $user)
 	{
 		$this->checkUser($user);
 
@@ -29,7 +29,7 @@ trait AuthHelper
 		return $user;
 	}
 
-	function createCode(User $user)
+	function createCode(?User $user)
 	{
 		$this->checkUser($user);
 
@@ -40,7 +40,7 @@ trait AuthHelper
 		return $user;
 	}
 
-	function updatePassword(User $user, $password)
+	function updatePassword(?User $user, $password)
 	{
 		$this->checkUser($user);
 

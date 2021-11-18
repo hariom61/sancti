@@ -62,7 +62,7 @@ class Sancti
 			throw new Exception("Unable to send e-mail, please try again later.", 422);
 		}
 
-		return ['message' => 'Account has been created, please confirm your email address.'];
+		return response(['message' => 'Account has been created, please confirm your email address.', 'created' => true], 201);
 	}
 
 	function activate(ActivateRequest $request)
@@ -88,10 +88,11 @@ class Sancti
 
 	function reset(ResetPasswordRequest $request)
 	{
+		$user = null;
 		$valid = $request->validated();
 
 		try {
-			$user = User::where(['email' => $valid['email']])->first();
+			$user = User::where('email', $valid['email'])->first();
 		} catch (Exception $e) {
 			Log::error($e->getMessage());
 			throw new Exception("Database error.", 422);
@@ -105,7 +106,7 @@ class Sancti
 			Mail::to($user)->send(new PasswordMail($user, $password));
 		} catch (Exception $e) {
 			Log::error($e->getMessage());
-			throw new Exception("Unable to send e-mail, please try again later.");
+			throw new Exception("Unable to send e-mail, please try again later." . $e->getMessage());
 		}
 
 		return ['message' => 'A new password has been sent to the e-mail address provided.'];

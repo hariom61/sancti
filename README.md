@@ -213,6 +213,27 @@ Add import repo path to **dev-main** directory
 }
 ```
 
+### Sancti testing
+```sh
+# go to laravel app
+cd app
+
+# create testing config in
+nano .env.testing
+
+# database tables
+php artisan --env=testing migrate
+
+# copy test files
+php artisan vendor:publish --tag=sancti-tests --force
+
+# test with artisan
+php artisan test tests/Sancti --stop-on-failure
+
+# or with phpunit
+vendor/bin/phpunit tests/Sancti --stop-on-failure
+```
+
 ### Install vps/linux
 Install required server packages.
 ```sh
