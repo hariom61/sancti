@@ -13,8 +13,8 @@ Rest api register / login authentication with user account email verification ba
 ## Create database user with mysql
 mysql -u root -p
 ```sh
-GRANT ALL PRIVILEGES ON *.* TO root@localhost IDENTIFIED BY 'toor';
-GRANT ALL PRIVILEGES ON *.* TO root@127.0.0.1 IDENTIFIED BY 'toor';
+GRANT ALL PRIVILEGES ON *.* TO root@localhost IDENTIFIED BY 'toor' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO root@127.0.0.1 IDENTIFIED BY 'toor' WITH GRANT OPTION;
 ```
 
 ### Create database mysql command line
