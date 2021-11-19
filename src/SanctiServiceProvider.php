@@ -34,9 +34,11 @@ class SanctiServiceProvider extends ServiceProvider
 	{
 		$this->loadViewsFrom(__DIR__.'/../resources/views', 'sancti');
 		$this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'sancti');
-
-		$this->loadRoutesFrom(__DIR__.'/../routes/api.php');
 		$this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+		if(config('sancti.settings.routes') == true) {
+			$this->loadRoutesFrom(__DIR__.'/../routes/api.php');
+		}
 
 		if ($this->app->runningInConsole()) {
 			$this->publishes([
