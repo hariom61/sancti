@@ -50,6 +50,8 @@ class SanctiController extends Controller
 
 	function user(Request $r)
 	{
-		return ['user' => $r->user()];
+		return [
+			'user' => $r->user()
+		];
 	}
 }

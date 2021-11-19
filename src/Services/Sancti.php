@@ -31,7 +31,7 @@ class Sancti
 				Log::error($e->getMessage());
 				throw new Exception("Confirm email address.", 422);
 			}
-			return ['token' => $request->user()->createToken('sancti-auth')->plainTextToken];
+			return ['token' => $request->user()->createToken('sancti-auth', ['role:user'])->plainTextToken];
 		} else {
 			throw new Exception("Invalid credentials.", 422);
 		}
