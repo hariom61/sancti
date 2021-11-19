@@ -90,7 +90,25 @@ class SanctiHandler extends ExceptionHandler
 
 		$this->renderable(function (Exception $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => $e->getMessage()], 422);
+				$code = (int) $e->getCode();
+
+				if($code < 400) {
+					$code = 422;
+				}
+
+				$res['message'] = $e->getMessage();
+
+				if (config('app.debug')) {
+					if (config('sancti.settings.debug') == true) {
+						$res['code'] = $code;
+						$res['ex'] = get_class($e);
+						$res['file'] = $e->getFile();
+						$res['line'] = $e->getLine();
+						$res['trace'] = $e->getTrace();
+					}
+				}
+
+				return response()->json($res, $code);
 			}
 		});
 	}

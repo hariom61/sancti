@@ -8,7 +8,6 @@ use Sancti\Exceptions\SanctiHandler;
 use Sancti\Exceptions\SanctiCodeHandler;
 use Sancti\Http\Facades\SanctiFacade;
 use Sancti\Services\Sancti;
-use Tests\Sancti\SanctiTest;
 
 class SanctiServiceProvider extends ServiceProvider
 {

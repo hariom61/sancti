@@ -3,7 +3,6 @@
 namespace Sancti\Exceptions;
 
 use Throwable;
-use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class SanctiCodeHandler extends ExceptionHandler
@@ -46,7 +45,7 @@ class SanctiCodeHandler extends ExceptionHandler
 	{
 		$ex = $this->prepareException($ex);
 
-		if ($ex instanceof \Illuminate\Http\Exception\HttpResponseException) {
+		if ($ex instanceof \Illuminate\Http\Exceptions\HttpResponseException) {
 			$ex = $ex->getResponse();
 		}
 
@@ -103,9 +102,8 @@ class SanctiCodeHandler extends ExceptionHandler
 		}
 
 		if (config('app.debug')) {
-			$res['code'] = $code;
-
 			if (config('sancti.settings.debug') == true) {
+				$res['code'] = $code;
 				$res['ex'] = get_class($ex);
 				$res['file'] = $ex->getFile();
 				$res['line'] = $ex->getLine();

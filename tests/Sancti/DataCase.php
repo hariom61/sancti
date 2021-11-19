@@ -64,7 +64,6 @@ class DataCase extends TestCase
 
 	function refreshDatabase()
 	{
-		$this->baseRefreshDatabase();
 		$this->artisan('db:seed');
 	}
 }

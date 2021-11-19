@@ -9,7 +9,6 @@ use Sancti\Http\Requests\ActivateRequest;
 use Sancti\Http\Requests\RegisterRequest;
 use Sancti\Http\Requests\ResetPasswordRequest;
 use Sancti\Http\Requests\ChangePasswordRequest;
-use Sancti\Mail\RegisterMail;
 use Sancti\Services\Sancti;
 
 class SanctiController extends Controller

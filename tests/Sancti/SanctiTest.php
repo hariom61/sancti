@@ -4,15 +4,13 @@ namespace Tests\Sancti;
 
 use App\Models\User;
 use Tests\Sancti\DataCase;
-use Sancti\Mail\RegisterMail;
-use Sancti\Mail\PasswordMail;
-use Illuminate\Contracts\Console\Kernel;
+use Laravel\Sanctum\Sanctum;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Mail\Events\MessageSent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Mail\Events\MessageSent;
 
 /*
 	php artisan test --testsuite=Sancti --stop-on-failure
@@ -30,7 +28,6 @@ class SanctiTest extends DataCase
 		Event::fake([MessageSent::class]);
 
 		$response = $this->postJson('api/register', $this->data);
-
 		$response->assertStatus(201)->assertJson(['created' => true]);
 		$this->assertDatabaseHas('users', ['email' => $this->data['email']]);
 
@@ -146,6 +143,16 @@ class SanctiTest extends DataCase
 		$c = 'Bearer ' . $this->getToken();
 		$response = $this->withHeaders(['Authorization' => $c])->getJson('/api/delete');
 		$response->assertStatus(200)->assertJson(['message' => 'Tokens has been removed.']);
+	}
+
+	public function test_user_details_can_be_retrieved()
+	{
+		Sanctum::actingAs(
+			User::factory()->create(),
+			['view-user']
+		);
+		$response = $this->get('/api/user');
+		$response->assertOk();
 	}
 
 	/* Test ERROR response */
