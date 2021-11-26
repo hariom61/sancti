@@ -82,7 +82,7 @@ class Sancti
 
 	function logout(Request $request)
 	{
-		$request->user()->tokens()->delete();
+		$request->user()->currentAccessToken()->delete();
 		return ['message' => 'Logged out.'];
 	}
 
@@ -130,7 +130,19 @@ class Sancti
 
 	function delete(Request $request)
 	{
-		$request->user()->tokens()->delete();
+		$request->user()->currentAccessToken()->delete();
+		return ['message' => 'Token has been removed.'];
+	}
+
+	function delete_all(Request $request)
+	{
+		$this->deleteAllTokens($request);
+		return ['message' => 'Tokens has been removed.'];
+	}
+
+	function delete_auth(Request $request)
+	{
+		$this->deleteAuthTokens($request);
 		return ['message' => 'Tokens has been removed.'];
 	}
 }

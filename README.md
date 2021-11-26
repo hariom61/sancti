@@ -137,9 +137,15 @@ curl http://127.0.0.1:8000/api/change-password -d '{"password_current": "passwor
 curl http://app.xx/api/logout -H 'Authorization: Bearer 1|Sfp1JQPzY0AoeETTkR9A8QkrAMDZ5ITQxrrwLpZK'
 curl http://127.0.0.1:8000/api/logout -H 'Authorization: Bearer 3|pxskFEFmBB0VZbQsAoYf88l5SXtD5cCA1RDLjtBO'
 
-# delete tokens logged users
+# delete logged user token
 curl http://app.xx/api/delete -H 'Authorization: Bearer 1|Sfp1JQPzY0AoeETTkR9A8QkrAMDZ5ITQxrrwLpZK'
 curl http://127.0.0.1:8000/api/delete -H 'Authorization: Bearer 3|pxskFEFmBB0VZbQsAoYf88l5SXtD5cCA1RDLjtBO'
+
+# delete sanctum-auth tokens
+curl -X GET http://app.xx/api/delete-auth -H 'Authorization: Bearer 35|5ftdM03gBc3ETxvMS5j91NHfupDxkniNNSS23Cxy'
+
+# delete all tokens
+curl -X GET http://app.xx/api/delete-all -H 'Authorization: Bearer 35|5ftdM03gBc3ETxvMS5j91NHfupDxkniNNSS23Cxy'
 ```
 
 ## Sanctum routes

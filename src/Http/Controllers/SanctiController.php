@@ -48,6 +48,16 @@ class SanctiController extends Controller
 		return (new Sancti())->delete($r);
 	}
 
+	function delete_all(Request $r)
+	{
+		return (new Sancti())->delete_all($r);
+	}
+
+	function delete_auth(Request $r)
+	{
+		return (new Sancti())->delete_auth($r);
+	}
+
 	function user(Request $r)
 	{
 		return [

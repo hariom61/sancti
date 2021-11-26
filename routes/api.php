@@ -15,9 +15,11 @@ Route::prefix('api')->name('api.')->middleware(['api'])->group(function() {
 	// Only logged users
 	Route::middleware(['auth:sanctum'])->group(function () {
 		Route::get('/user', [SanctiController::class, 'user'])->name('user');
-		Route::get('/delete', [SanctiController::class, 'delete'])->name('delete');
 		Route::get('/logout', [SanctiController::class, 'logout'])->name('logout');
 		Route::post('/change-password', [SanctiController::class, 'change'])->name('change-password');
+		Route::get('/delete', [SanctiController::class, 'delete'])->name('delete');
+		Route::get('/delete-all', [SanctiController::class, 'delete_all'])->name('delete-all');
+		Route::get('/delete-auth', [SanctiController::class, 'delete_auth'])->name('delete-auth');
 	});
 
 });

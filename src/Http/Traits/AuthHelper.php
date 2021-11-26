@@ -69,4 +69,18 @@ trait AuthHelper
 	{
 		return $user->toJson(JSON_PRETTY_PRINT);
 	}
+
+	function deleteAuthTokens($request)
+	{
+		foreach ($request->user()->tokens as $k => $t) {
+			if(in_array('role:user', $t->abilities) && $t->name == 'sancti-auth') {
+				$t->delete();
+			}
+		}
+	}
+
+	function deleteAllTokens($request)
+	{
+		$request->user()->tokens()->delete();
+	}
 }
