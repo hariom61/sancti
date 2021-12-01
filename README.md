@@ -80,6 +80,16 @@ nano app/Http/Kernel.php
 ]
 ```
 
+## Sanctum middleware for abilities (optional)
+nano app/Http/Kernel.php
+```php
+<?php
+protected $routeMiddleware = [
+	'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class,
+	'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
+];
+```
+
 ## Sancti setup
 ```sh
 php artisan vendor:publish --provider="Sancti\SanctiServiceProvider.php"
@@ -170,6 +180,17 @@ Route::prefix('api')->name('api.')->middleware(['api'])->group(function() {
 
 	Route::middleware(['auth:sanctum'])->group(function () {
 		// Private routes goes here (logged users)
+	});
+
+	Route::prefix('panel')->middleware(['auth:sanctum', 'ability:role-worker,role-admin'])->group(function () {
+		// Private routes for user role worker and admin
+		// Route::resource('orders', OrdersController::class);
+	});
+
+
+	Route::prefix('panel')->middleware(['auth:sanctum', 'ability:role-admin'])->group(function () {
+		// Private routes for administrator
+		// Route::resource('settings', SettingsController::class);
 	});
 });
 
