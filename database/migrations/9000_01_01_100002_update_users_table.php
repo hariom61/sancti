@@ -17,6 +17,9 @@ class UpdateUsersTable extends Migration
 			if (!Schema::hasColumn('users', 'email_verified_at')) {
 				$table->timestamp('email_verified_at')->nullable(true);
 			}
+			if (!Schema::hasColumn('users', 'role')) {
+				$table->enum('role', ['user','worker','admin'])->nullable()->default('user');
+			}
 			if (!Schema::hasColumn('users', 'code')) {
 				$table->string('code', 128)->unique()->nullable(true);
 			}
@@ -37,7 +40,7 @@ class UpdateUsersTable extends Migration
 	public function down()
 	{
 		Schema::table('users', function (Blueprint $table) {
-			$table->dropColumn(['code', 'ip']);
+			$table->dropColumn(['code', 'ip', 'role']);
 		});
 	}
 }

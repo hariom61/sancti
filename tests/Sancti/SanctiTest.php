@@ -142,7 +142,7 @@ class SanctiTest extends DataCase
 	{
 		$c = 'Bearer ' . $this->getToken();
 		$response = $this->withHeaders(['Authorization' => $c])->getJson('/api/delete');
-		$response->assertStatus(200)->assertJson(['message' => 'Tokens has been removed.']);
+		$response->assertStatus(200)->assertJson(['message' => 'Token has been removed.']);
 	}
 
 	public function test_user_details_can_be_retrieved()
