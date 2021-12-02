@@ -8,9 +8,9 @@
 		],
 		"psr-4": {
 			"Sancti\\": "src/",
-			"Sancti\\Factories\\": "database/factories/",
-			"Sancti\\Migrations\\": "database/migrations/",
-			"Sancti\\Seeders\\": "database/seeders/"
+			"Database\\Factories\\": "database/factories/",
+			"Database\\Migrations\\": "database/migrations/",
+			"Database\\Seeders\\": "database/seeders/"
 		}
 	},
 	"authors": [{
