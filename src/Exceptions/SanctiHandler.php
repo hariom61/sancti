@@ -36,55 +36,55 @@ class SanctiHandler extends ExceptionHandler
 
 		$this->renderable(function (MethodNotAllowedHttpException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Invalid method.'], 405);
+				return response()->json(['message' => 'Method Not Allowed'], 405);
 			}
 		});
 
 		$this->renderable(function (InvalidParameterException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Invalid parametr.'], 422);
+				return response()->json(['message' => 'Invalid Parametr'], 422);
 			}
 		});
 
 		$this->renderable(function (ResourceNotFoundException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Resource not found.'], 422);
+				return response()->json(['message' => 'Resource Not Found'], 404);
 			}
 		});
 
 		$this->renderable(function (RouteNotFoundException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Unauthorized route.'], 404);
+				return response()->json(['message' => 'Route Not Found'], 404);
 			}
 		});
 
 		$this->renderable(function (MissingMandatoryParametersException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Invalid parametr.'], 422);
+				return response()->json(['message' => 'Missing Parameters'], 422);
 			}
 		});
 
 		$this->renderable(function (HttpResponseException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Invalid response.'], 422);
+				return response()->json(['message' => 'Http Response'], 422);
 			}
 		});
 
 		$this->renderable(function (NotFoundHttpException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Page not found.'], 404);
+				return response()->json(['message' => 'Http Not Found'], 404);
 			}
 		});
 
 		$this->renderable(function (PostTooLargeException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Post data too large.'], 422);
+				return response()->json(['message' => 'Post Too Large'], 422);
 			}
 		});
 
 		$this->renderable(function (ThrottleRequestsException $e, $request) {
 			if ($request->is('api/*')) {
-				return response()->json(['message' => 'Too many requests.'], 429);
+				return response()->json(['message' => 'Too Many Requests'], 429);
 			}
 		});
 

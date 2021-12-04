@@ -75,11 +75,14 @@ class SanctiCodeHandler extends ExceptionHandler
 		$res = [];
 
 		switch ($code) {
+			case 400:
+				$res['message'] = 'Bad Request';
+				break;
 			case 401:
 				$res['message'] = 'Unauthorized';
 				break;
 			case 402:
-				$res['message'] = 'Payment required';
+				$res['message'] = 'Payment Required';
 				break;
 			case 403:
 				$res['message'] = 'Forbidden';
@@ -93,8 +96,11 @@ class SanctiCodeHandler extends ExceptionHandler
 			case 406:
 				$res['message'] = 'Not Acceptable';
 				break;
+			case 408:
+				$res['message'] = 'Request Timeout';
+				break;
 			case 429:
-				$res['message'] = 'Too many requests';
+				$res['message'] = 'Too Many Requests';
 				break;
 			default:
 				$res['message'] = $ex->getMessage();
