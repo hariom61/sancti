@@ -61,6 +61,8 @@ class SanctiCodeHandler extends ExceptionHandler
 			$json = json_decode($ex->content());
 			if(!empty($json->message)) {
 				$ex = new \Exception($json->message, 422);
+			} else {
+				$ex = new \Exception($ex->content(), 422);
 			}
 		}
 
