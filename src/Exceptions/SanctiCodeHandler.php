@@ -60,7 +60,7 @@ class SanctiCodeHandler extends ExceptionHandler
 		if($ex instanceof \Illuminate\Http\JsonResponse) {
 			$json = json_decode($ex->content());
 			if(!empty($json->message)) {
-				$ex = new \Exception($json->message, 403);
+				$ex = new \Exception($json->message, 422);
 			} else {
 				$ex = new \Exception("Unauthorized", 401);
 			}
