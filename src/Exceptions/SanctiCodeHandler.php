@@ -71,7 +71,11 @@ class SanctiCodeHandler extends ExceptionHandler
 
 	private function customApiResponse($ex)
 	{
-		$code = (int) $ex->getCode();
+		$code = 422;
+
+		if (method_exists($ex, 'getCode')) {
+			$code = (int) $ex->getCode();
+		}
 
 		if (method_exists($ex, 'getStatusCode')) {
 			$code = (int) $ex->getStatusCode();
