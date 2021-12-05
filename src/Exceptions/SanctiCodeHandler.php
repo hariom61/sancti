@@ -3,6 +3,7 @@
 namespace Sancti\Exceptions;
 
 use Throwable;
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class SanctiCodeHandler extends ExceptionHandler
@@ -60,9 +61,9 @@ class SanctiCodeHandler extends ExceptionHandler
 		if($ex instanceof \Illuminate\Http\JsonResponse) {
 			$json = json_decode($ex->content());
 			if(!empty($json->message)) {
-				$ex = new \Exception($json->message, 422);
+				$ex = new Exception($json->message, 422);
 			} else {
-				$ex = new \Exception($ex->content(), 422);
+				$ex = new Exception($ex->content(), 422);
 			}
 		}
 
