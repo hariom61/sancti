@@ -57,6 +57,16 @@ class SanctiCodeHandler extends ExceptionHandler
 			$ex = $this->convertValidationExceptionToResponse($ex, $request);
 		}
 
+		if($ex instanceof \Illuminate\Http\JsonResponse) {
+			$json = json_decode($ex->content());
+			$msg = $json->message;
+			if(!empty($msg)) {
+				$ex = new \Exception($msg, 403);
+			} else {
+				$ex = new \Exception("Unauthorized", 401);
+			}
+		}
+
 		return $this->customApiResponse($ex);
 	}
 
