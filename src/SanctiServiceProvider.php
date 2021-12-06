@@ -3,7 +3,7 @@
 namespace Sancti;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Contracts\Debug\ExceptionHandler;iibhibiubn
 use Sancti\Exceptions\SanctiHandler;
 use Sancti\Exceptions\SanctiCodeHandler;
 use Sancti\Http\Facades\SanctiFacade;
